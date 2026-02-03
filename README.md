@@ -49,5 +49,23 @@ The API is designed around a **State-Driven Model**. Instead of sending raw stri
     ],
     "total_amount": 410,
     "payment_status": true
+
+---
+
+## 🔴 Error Scenario: "Payment Pending"
+*Triggered when the payment boolean is false. The API communicates the "Recovery Action" to the client.*
+
+> **Critical Note:** When `payment_status` is `false`, the delivery partner app must halt the driver's dispatch and trigger the payment collection UI.
+
+```json
+{
+  "status": "error",
+  "error_code": "PAYMENT_REQUIRED",
+  "message": "Payment pending. Do not release order for delivery.",
+  "details": {
+    "order_id": "ORD-776",
+    "pending_amount": 410
+  }
+}
   }
 }
