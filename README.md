@@ -65,5 +65,3 @@ The API is designed around a **State-Driven Model**. Instead of sending raw stri
     "pending_amount": 410
   }
 }
-  }
-}
