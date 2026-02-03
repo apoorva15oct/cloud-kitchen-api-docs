@@ -23,8 +23,6 @@ The API is designed around a **State-Driven Model**. Instead of sending raw stri
 ## 🟢 Success Scenario: "The Happy Path"
 *This JSON is generated when an order is successfully processed and paid.*
 
-
-
 ```json
 {
   "name": "order",
@@ -48,7 +46,7 @@ The API is designed around a **State-Driven Model**. Instead of sending raw stri
       }
     ],
     "total_amount": 410,
-    "payment_status": true}
+    "payment_status": true},
 
 ---
 
