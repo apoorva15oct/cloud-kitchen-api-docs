@@ -1,26 +1,32 @@
-# cloud-kitchen-api-docs
+# 🍱 Cloud-Kitchen Order Management API
+> **Industrial Level:** Production-Ready | **Architecture:** Object-Oriented | **Format:** JSON
 
-##Project Title: Cloud-Kitchen Order Management 
+This repository contains the technical specification for a **Cloud-Kitchen Order System**. It acts as the "Universal Translator" between a high-performance Java backend and external Delivery Partner applications.
 
-##APIOverview: This API acts as the bridge between the kitchen's internal Java-based order processing engine and the external delivery partner's application. 
+---
 
-It handles order state, customer tiering, and complex item instructions.Data Model (The "Object" Definition)The system processes orders as high-level objects. 
+## 🛠 System Architecture
+The API is designed around a **State-Driven Model**. Instead of sending raw strings, the system exports "Snapshots" of the order's current state from the Java environment.
 
-Below is the breakdown of the fields returned in an order 
+### **Data Blueprint (Object Definition)**
 
-snapshot.FieldType
+| Field | Type | Description |
+| :--- | :--- | :--- |
+| `order_id` | `String` | Unique alphanumeric transaction key. |
+| `order_time` | `ISO-8601` | Universal timestamp of order creation. |
+| `customer` | `Object` | Nested object containing `name` and `tier`. |
+| `items` | `Array` | A collection of `Item` objects with custom instructions. |
+| `payment_status`| `Boolean` | Final gate for order release (True/False). |
 
-###Description:
+---
 
-order_idString - Unique alphanumeric identifier for the transaction.
-order_timeTimestamp - ISO 8601 formatted time of order creation.
-customerObject - Nested object containing name and membership tier.
-itemsArray - A list of individual food items and their specific instructions.
-payment_statusBoolean - True if payment is captured; False if pending. 
+## 🟢 Success Scenario: "The Happy Path"
+*This JSON is generated when an order is successfully processed and paid.*
 
-Example: Successful Order ResponseWhen an order is successfully processed by the Java backend, the following JSON snapshot is generated:
 
-JSON{
+
+```json
+{
   "name": "order",
   "details": {
     "order_id": "ORD-776",
@@ -43,14 +49,5 @@ JSON{
     ],
     "total_amount": 410,
     "payment_status": true
-  }
-}
-Error State: Payment PendingIf the payment_status returns false, the delivery partner's app must trigger a "Payment Collection" flow.JSON{
-  "status": "error",
-  "error_code": "PAYMENT_REQUIRED",
-  "message": "Payment pending. Do not release order for delivery.",
-  "details": {
-    "order_id": "ORD-776",
-    "pending_amount": 410
   }
 }
