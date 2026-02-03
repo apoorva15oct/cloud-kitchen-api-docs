@@ -48,7 +48,7 @@ The API is designed around a **State-Driven Model**. Instead of sending raw stri
       }
     ],
     "total_amount": 410,
-    "payment_status": true
+    "payment_status": true}
 
 ---
 
